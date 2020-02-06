@@ -11,6 +11,10 @@ import AlamofireImage
 
 class MovieGridViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
+    var screenSize: CGRect!
+    var screenWidth: CGFloat!
+    var screenHeight: CGFloat!
+    
     var movies = [[String:Any]]()
 
     @IBOutlet weak var collectionView: UICollectionView!
@@ -21,7 +25,27 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
         
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        screenSize = UIScreen.main.bounds
+        screenWidth = screenSize.width
+        screenHeight = screenSize.height
+        
+        
+       let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+              layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+              layout.itemSize = CGSize(width: screenWidth/3, height: screenWidth/3)
+        layout.minimumInteritemSpacing = 0
+              layout.minimumLineSpacing = 2
+              collectionView!.collectionViewLayout = layout
 
+//        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+//
+//        layout.minimumLineSpacing = 4
+//        layout.minimumInteritemSpacing = 0
+//
+//        let width  = (view.frame.size.width - layout.minimumInteritemSpacing * 2) / 3
+//        layout.itemSize = CGSize(width: width, height: width * 3 / 2)
+    
         
         let url = URL(string: "https://api.themoviedb.org/3/movie/297762/similar?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US&page=1")!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
@@ -51,6 +75,8 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
         return movies.count
     }
     
+    
+   
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieGridCell", for: indexPath) as! MovieGridCell
         
@@ -64,5 +90,24 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
         
         return cell
     }
+
+    
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender as! UICollectionViewCell
+        let indexPath = collectionView.indexPath(for: cell)!
+        
+        let movie = movies[indexPath.row]
+        
+        let details2ViewController = segue.destination as! MovieDetail2ViewController
+        
+        details2ViewController.movie = movie
+        
+        }
+
+    
+    
+    
     
 }
