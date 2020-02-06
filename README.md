@@ -20,7 +20,7 @@ Flix is an app that allows users to browse movies from the [The Movie Database A
 
 ### Notes
 Describe any challenges encountered while building the app.
---- When I was following how to create the grid, for some reason my grid was not working. There was a huge space in between the posters even though I followed what was on video. I reaserch other ways to do it and still the same result. It was until I copied and pasted some code snippet of Stack Overflow that it worked. 
+- When I was following how to create the grid, for some reason my grid was not working. There was a huge space in between the posters even though I followed what was on video. I reaserch other ways to do it and still the same result. It wasn't until I copied and pasted some code snippet form Stack Overflow that it worked. 
 
 ## Flix Part 1
 
